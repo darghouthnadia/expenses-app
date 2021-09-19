@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 import NewExpense from './Components/NewExpense/NewExpense';
 import Expenses from './Components/Expenses/Expenses';
+import ExpensesFilter from './Components/Expenses/ExpensesFilter';
 
 const App = () => {
 
@@ -29,9 +30,16 @@ const App = () => {
     ]
   );
 
+  const [filteredExpenses, setFilteredExpenses] = useState(expenses)
+
   const addNewExpense = (newExpense) => {
     setExpenses((prev) => [...prev, newExpense]);
     console.log(expenses);
+  }
+
+  const filterByYear = (event) => {
+    const toFilteredExpenses = expenses.filter((el) => el.date.getFullYear() ===  parseInt(event.target.value));
+    return setFilteredExpenses(toFilteredExpenses);
   }
 
   // return React.createElement(
@@ -44,7 +52,8 @@ const App = () => {
   return (
     <div>
       <NewExpense onNewExpense={addNewExpense}></NewExpense>
-      <Expenses items={expenses} />
+      <ExpensesFilter onFilter={filterByYear}/>
+      <Expenses items={filteredExpenses} />
     </div>
   );
 }
