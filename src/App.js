@@ -33,7 +33,7 @@ const App = () => {
   const [filteredExpenses, setFilteredExpenses] = useState(expenses)
 
   const addNewExpense = (newExpense) => {
-    setExpenses((prev) => [...prev, newExpense]);
+    setExpenses((prev) => [newExpense, ...prev]);
     console.log(expenses);
   }
 
